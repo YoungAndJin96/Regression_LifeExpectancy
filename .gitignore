@@ -131,3 +131,4 @@ dmypy.json
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 datas/
+features/models/
