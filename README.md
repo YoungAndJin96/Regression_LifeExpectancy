@@ -25,22 +25,31 @@ Fast Campus Data Science School 17th <b> Regression project </b>
   - GDP per capita, Death rates, Population 등 결측치 처리 및 추가용 자료 수집
 
 ## 🔎 EDA
-<img width="819" alt="heatmap" src="https://user-images.githubusercontent.com/71582831/118421256-c26e7f00-b6fb-11eb-81d3-684ffacbe9eb.png">
+<img width="500" alt="heatmap_new" src="https://user-images.githubusercontent.com/71582831/118845035-63308a80-b906-11eb-97e3-f1ae3ca98d77.png">
 
 
 ## 📈 Modeling
-- Feature selection
-  - PCA
-  - KMeans
-- Modeling
+- Pipeline 구축
   - Linear Regression
-  - Decision Tree Regressor
+  - Decison Tree Regressor
+  - PCA + Linear Regression
+  - PLS Regression
+  - Gradient Boosting Regressor
   - XGBoost Regressor
   - Random Forest Regressor
-- Predict & Model Evaluation
-  - R-squared
-  - RMSE
+  - Support Vector Regressor
+  - Lasso
+  - Ridge
+  - Kernel Ridge Regression
 
+- Model Evaluation
+<img width="500" alt="model_result" src="https://user-images.githubusercontent.com/71582831/118845152-7e9b9580-b906-11eb-8448-e5f4bd538049.png">
+
+- Results visualization
+<div>
+<img width="400" alt="linear_results" src="https://user-images.githubusercontent.com/71582831/118846047-49437780-b907-11eb-9a6c-7ff9043aeffa.png">
+<img width="400" alt="randomforest_results" src="https://user-images.githubusercontent.com/71582831/118846172-69733680-b907-11eb-9c73-82941920e573.png"></div>
+<br>
 
 ## 👩🏻‍🤝‍🧑🏻 Contributors
 - [Seyoung Ko](https://github.com/SeyoungKo) & [Hyunjin Kim](https://github.com/HyunjinKIM-Chloe)
