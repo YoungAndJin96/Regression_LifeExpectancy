@@ -245,7 +245,7 @@ if __name__ == '__main__':
     year_data = pc_data.groupby("YEAR").mean()
 
     v = Visualization(pc_data)
-    v.show_year_cols(year_data)  # 전체 컬럼별 평균값에 대한 전체 연도 추이
+    v.show_year_cols(year_data)
     year_df = p.minmax_scaling(year_data)
     v.show_year_regions('South Asia', 2, 3, cat_regions_df)
     v.show_moving_scatter(pc_data, 'POPULATION', 'YEAR')
