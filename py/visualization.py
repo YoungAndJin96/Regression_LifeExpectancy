@@ -23,12 +23,12 @@ class Preprocessing:
         original.columns = [cols.upper() for cols in original.columns.tolist()]
 
         # GDP per capita 데이터 추가
-        GDP_PERCAP = pd.read_csv("../datas/worldbank_gdppercap.csv")
-        GDP_PERCAP = GDP_PERCAP.groupby('Country Code').mean()
-        GDP_PERCAP.drop(columns=['2016', '2017', '2018', '2019', '2020'], axis=1, inplace=True)
+        gdp_percap = pd.read_csv("../datas/worldbank_gdppercap.csv")
+        gdp_percap = gdp_percap.groupby('Country Code').mean()
+        gdp_percap.drop(columns=['2016', '2017', '2018', '2019', '2020'], axis=1, inplace=True)
 
         # life_df에 GDP per capita 컬럼 추가
-        original["GDP_PERCAP"] = [GDP_PERCAP.loc[original['COUNTRYCODE'][i]][str(original['YEAR'][i])] for i in
+        original["GDP_PERCAP"] = [gdp_percap.loc[original['COUNTRYCODE'][i]][str(original['YEAR'][i])] for i in
                                   range(len(original))]
 
         original["GDP_PERCAP"].fillna(original["GDP"] / original["POPULATION"], inplace=True)
@@ -159,6 +159,7 @@ class Visualization:
 
         return fig.show()
 
+    # 전체 리전에 대한 컬럼 연도별 추이 plotly 그래프
     def show_year_regions(self, target_region, rows, cols, regions_df):
         category = []
         target_region_idx = constant.REGION[target_region] # 타겟 리전 데이터프레임 인덱스
