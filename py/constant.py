@@ -14,6 +14,7 @@ REGION = {'South Asia': 0, 'Europe & Central Asia': 1,
           'Middle East & North Africa': 2, 'Sub-Saharan Africa': 3,
           'Latin America & Caribbean': 4, 'East Asia & Pacific': 5, 'North America': 6}
 
+# Grid params
 GRID_DICT = {
     0: 'Linear Regression',
     1: 'Decison Tree Regressor',

@@ -18,8 +18,6 @@ from sklearn.svm import SVR
 from sklearn.kernel_ridge import KernelRidge
 
 from sklearn.preprocessing import MinMaxScaler, StandardScaler, RobustScaler
-import statsmodels.api as sm
-import plotly.express as px
 from plotly.offline import plot, iplot, init_notebook_mode
 import plotly.io as pio
 init_notebook_mode(connected=True)
@@ -184,7 +182,7 @@ class ModelPipeline:
 class Preprocessing:
     # 컬럼 추가
     def add_feature(self, original, filename=None):
-        path = "../datas/worldbank_"
+        path = constant.PATH + "worldbank_"
         original.columns = [cols.upper() for cols in original.columns.tolist()]
 
         if not filename == None:
@@ -201,10 +199,10 @@ class Preprocessing:
 
         # Nan값 GDP/POP으로 대체
         data["GDPPERCAP"].fillna(data["GDP"] / data["POPULATION"], inplace=True)
-        data.columns = [cols.upper() for cols in original.columns.tolist()]
+        data.columns = [cols.upper() for cols in data.columns.tolist()]
 
         if 'STATUS' in data.columns.tolist():
-            data = pd.get_dummies(original, columns=['STATUS'], drop_first=True)
+            data = pd.get_dummies(data, columns=['STATUS'], drop_first=True)
 
         return data
 
@@ -232,8 +230,8 @@ class Preprocessing:
             fence[r] = {}
 
             for i, f in enumerate(top_features):
-                q1 = np.percentile(original[data['REGION'] == r][top_features[i]].values, 25)
-                q3 = np.percentile(original[data['REGION'] == r][top_features[i]].values, 75)
+                q1 = np.percentile(data[data['REGION'] == r][top_features[i]].values, 25)
+                q3 = np.percentile(data[data['REGION'] == r][top_features[i]].values, 75)
                 iqr = q3 - q1
 
                 upper_fence = ((iqr * 1.5) + q3).round(3)

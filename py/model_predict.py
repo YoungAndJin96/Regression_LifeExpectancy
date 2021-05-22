@@ -32,7 +32,7 @@ class ModelPredict:
 
     # 컬럼 추가
     def add_feature(self, original, filename=None):
-        path = "../datas/worldbank_"
+        path = constant.PATH + "worldbank_"
         original.columns = [cols.upper() for cols in original.columns.tolist()]
 
         if not filename == None:
@@ -62,23 +62,23 @@ class ModelPredict:
 
         X = prep_data.drop(['COUNTRYCODE', 'ISO3166', 'COUNTRY', 'YEAR', 'LIFE_EXPECTANCY', 'REGION', 'INCOMEGROUP'], axis=1)
         y = prep_data['LIFE_EXPECTANCY']
-        # X_train, X_test, y_train, y_test = train_test_split(X, y, shuffle=True, test_size=0.2, random_state=13)
 
         X_pr = test_df[X.columns]
         y_pr = test_df['LIFE_EXPECTANCY']
         y_pred = saved_model.predict(X_pr)
 
-        r2_score = r2(y_pr, y_pred)
-
+        # r2_score = r2(y_pr, y_pred)
         print(f"{constant.GRID_DICT.get(model_idx)} | 예측 기대 수명:{y_pred.mean().round(2)} / RMSE:, {np.sqrt(mse(y_pr, y_pred)).round(2)}")
 
-        if r2_score is True:
-            print("저장된 모델들의 R2:", r2_score)
+        # if r2_score is True:
+        #     print("저장된 모델들의 R2:", r2_score)
+        return X
 
     # 추가 데이터 예측 결과
     def extra_predict(self, extra_df):
         for idx, model_idx in enumerate(range(len(constant.GRID_DICT))):
-            self.model_predict(model_idx, extra_df)
+            X = self.model_predict(prep_data, model_idx, extra_df)
+        return X
 
 class Visualization():
     def split_data(self, prep_data, X):
@@ -131,15 +131,12 @@ if __name__ == '__main__':
     fence = pp.get_fence(data, top_features)
     prep_data = pp.drop_outlier(data, fence, top_features)
     prep_data.reset_index(inplace=True, drop=True)
-    print(prep_data)
 
     kor_df = mp.set_testset(original)
-    mp.model_predict()
-    mp.extra_predict(kor_df)
+    X = mp.extra_predict(kor_df)
 
     v = Visualization()
-    model_idx = 0
-    # v.reg_plotly(prep_data, X, model_idx)
+    # v.reg_plotly(prep_data, X, model_idx=0)
 
 
 
